@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rb;
     public Animator animator;
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] SpriteRenderer sprite;//glitch when player flips-collider box
     public float speed = 5f;
     public float runSpeed = 10f;
     public float jumpforce = 5f;

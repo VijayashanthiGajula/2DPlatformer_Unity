@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour
 
     void Update()
     {
-
+if(PlayermaxHealth>0){
         if (Input.GetButtonDown("Attack"))//left ctrl
         {
             Attack();
@@ -28,6 +28,10 @@ public class PlayerCombat : MonoBehaviour
             // isShielded = true;
             Shield();
         }
+}else{
+    Debug.Log("layer dead");
+}
+      
     }
     private void Attack()
     {
@@ -83,6 +87,11 @@ public class PlayerCombat : MonoBehaviour
             animator.SetBool("IsFlagIdle", true);
             Debug.Log("Level1 finished");
         }
+     if(colliderTag=="Enemy"){
+         PlayermaxHealth-=10;
+     }
+
+        
     }
 
 }

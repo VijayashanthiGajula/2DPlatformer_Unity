@@ -9,6 +9,7 @@ TagManager:
   - Cherry
   - Banana
   - Apple
+  - Enemy
   layers:
   - Default
   - TransparentFX

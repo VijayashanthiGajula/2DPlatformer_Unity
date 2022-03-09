@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-     
+     public GameObject GO;
     public int maxHealth=100;
    [SerializeField] int currentHealth;
     public Animator animator;
@@ -27,7 +27,8 @@ public class EnemyScript : MonoBehaviour
    void Die(){
         Debug.Log("Enemy dead");
          animator.SetBool("IsDead", true);
-         GetComponent<Collider2D>().enabled=false;
+         Destroy(GO);
+         //GetComponent<Collider2D>().enabled=false;
          //this.enabled=false;
          
     }
