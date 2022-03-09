@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(x));
         rb.velocity = new Vector2(x, rb.velocity.y);
 
-        //Debug.Log("Walk speed " + x);
+            // Debug.Log("Walk speed " + x);
 
     }
     // private void Run()
@@ -61,7 +61,8 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         isGrounded = false;
-        animator.SetBool("IsJumping", true);
+         animator.SetBool("IsJumping", true);
+         // animator.SetTrigger("IsJump");
         rb.velocity = new Vector2(rb.velocity.x, jumpforce);
        // Debug.Log("jump event  isGrounded " + isGrounded);
 
@@ -71,8 +72,9 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;
-            // Debug.Log("collision event  isGrounded " + isGrounded);
+           //  Debug.Log("collision event  "  );
             animator.SetBool("IsJumping", false);
+         
         }
 
 
