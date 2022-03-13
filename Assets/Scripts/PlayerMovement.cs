@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,9 +13,11 @@ public class PlayerMovement : MonoBehaviour
     public float jumpforce = 5f;
     [SerializeField] bool isGrounded = true;
     [SerializeField] float x;
+    public AudioClip BackGroundMusic;
 
     private void Start()
     {
+        
 
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -69,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
+        
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;

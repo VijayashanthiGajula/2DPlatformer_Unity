@@ -4,32 +4,59 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-     public GameObject GO;
-    public int maxHealth=100;
-   [SerializeField] int currentHealth;
+    public GameObject EnemyObj;
+    public Transform Player;
+    public int maxHealth = 100;
+    public int currentHealth;
     public Animator animator;
 
-
-   private void Start() {
-       currentHealth=maxHealth;
-   }
-
-   public void enemyDamage(int damage)
+    //attacking player
+    public float attackRange = 0.5f;
+    public int attackDamage = 1;
+    public Transform AttackEnemyPoint;
+    public LayerMask PlayerLayer;
+    private void Start()
     {
-     currentHealth-=damage;   
-     Debug.Log(currentHealth);
-     //Hit animation
-     animator.SetTrigger("IsHit");
-     if(currentHealth<=0){
-         Die();
-     }
+        currentHealth = maxHealth;
     }
-   void Die(){
-        Debug.Log("Enemy dead");
-         animator.SetBool("IsDead", true);
-         Destroy(GO);
-         //GetComponent<Collider2D>().enabled=false;
-         //this.enabled=false;
-         
+    private void Update()
+    {
+        if (currentHealth > 0 && Vector2.Distance(EnemyObj.transform.position, Player.position) < 2)
+        { animator.SetTrigger("IsNear"); }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+
+        if (currentHealth > 0)
+        {
+            animator.SetTrigger("IsNear");
+            EnemyAttack();
+
+        }
+
+    }
+    public void EnemyAttack()
+    {
+
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(AttackEnemyPoint.position, attackRange, PlayerLayer);
+        foreach (Collider2D player in hitPlayer)
+        {
+            player.GetComponent<PlayerCombat>().PlayerDamage(attackDamage);
+        }
+    }
+    public void enemyDamage(int damage)
+    {
+        //Hit animation
+        animator.SetTrigger("IsHit");
+        currentHealth -= damage;
+        if (currentHealth == 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        animator.SetBool("IsDead", true);
+        Destroy(EnemyObj);
     }
 }
